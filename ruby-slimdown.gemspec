@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby/slimdown/version'
+require 'slimdown/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ruby-slimdown"
-  spec.version       = Ruby::Slimdown::VERSION
+  spec.version       = Slimdown::VERSION
   spec.authors       = ["William Johnston"]
   spec.email         = ["wjohnston@mpr.org"]
 
