@@ -7,10 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "ruby-slimdown"
   spec.version       = Ruby::Slimdown::VERSION
   spec.authors       = ["William Johnston"]
-  spec.email         = ["william@johnstonhaus.us"]
+  spec.email         = ["wjohnston@mpr.org"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{A system for using Markdown from a folder and turning it into web pages.}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
