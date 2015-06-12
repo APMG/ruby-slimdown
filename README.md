@@ -3,6 +3,8 @@
 Slimdown is a simple gem to allow you to easily add static pages to your app
 via a folder full of Markdown files.
 
+[![Build Status](https://travis-ci.org/APMG/ruby-slimdown.svg?branch=master)](https://travis-ci.org/APMG/ruby-slimdown)
+
 ## Installation
 
 Add this line to your application's Gemfile:
