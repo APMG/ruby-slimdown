@@ -5,7 +5,22 @@ describe Slimdown do
     expect(Slimdown::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  describe '.config' do
+    it 'manages configuration' do
+      config = Slimdown.config do |c|
+        c.location = 'blahblahblah'
+      end
+
+      expect(config.location).to eql('blahblahblah')
+    end
+
+    it 'returns config after setting it' do
+      Slimdown.config do |c|
+        c.location = 'blahblahblah'
+      end
+
+      config = Slimdown.config
+      expect(config.location).to eql('blahblahblah')
+    end
   end
 end
