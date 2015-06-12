@@ -31,6 +31,23 @@ describe Slimdown::Page do
     end
   end
 
+  describe '#children' do
+    it 'returns children' do
+      page = Slimdown::Page.find('test')
+      children = page.children
+      expect(children.count).to eql(1)
+      child = children.first
+      expect(child.path).to eql('test/child')
+      expect(child.title).to eql('A test child title')
+    end
+
+    it 'returns empty array when no children' do
+      page = Slimdown::Page.find('test/child')
+      children = page.children
+      expect(children.count).to eql(0)
+    end
+  end
+
   describe '#path' do
     it 'works at root level' do
       page = Slimdown::Page.find('test')

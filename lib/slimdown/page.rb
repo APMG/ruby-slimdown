@@ -33,25 +33,22 @@ module Slimdown
       # Sibling folder.
       folder = File.dirname @absolute_path
 
-      pages_dir = Dir.new folder
-      files = pages_dir.entries.grep(/\.md\z/i)
+      Slimdown::Folder.new(folder).pages
+    end
 
-      sibs = []
+    def children
+      # Check to see whether dir exists.
+      folder = @absolute_path
+      folder.slice! '.md'
 
-      files.each do |file|
-        path = "#{folder}/#{file}"
-        sibs << self.class.new(path)
-      end
-
-      sibs
+      Slimdown::Folder.new(folder).pages
     end
 
     def path
-      config = Slimdown.config
-      loc = config.location
+      loc = Slimdown.config.location
       relative = @absolute_path
       relative.slice! "#{loc}/#{PAGES_PATH_NAME}/"
-      relative.slice! ".md"
+      relative.slice! '.md'
 
       relative
     end
