@@ -6,11 +6,11 @@ module Slimdown
     attr_reader :title
     attr_reader :template
 
-    def initialize(path)
+    def initialize(absolute_path)
       # Open the markdown file.
-      @path = path
+      @absolute_path = absolute_path
 
-      @parsed_page = Slimdown::PageParser.new @path
+      @parsed_page = Slimdown::PageParser.new @absolute_path
 
       load_headers
     end
@@ -25,6 +25,35 @@ module Slimdown
 
     def body
       @parsed_page.body
+    end
+
+    def siblings
+      # List other markdown files in the same folder.
+
+      # Sibling folder.
+      folder = File.dirname @absolute_path
+
+      pages_dir = Dir.new folder
+      files = pages_dir.entries.grep(/\.md\z/i)
+
+      sibs = []
+
+      files.each do |file|
+        path = "#{folder}/#{file}"
+        sibs << self.class.new(path)
+      end
+
+      sibs
+    end
+
+    def path
+      config = Slimdown.config
+      loc = config.location
+      relative = @absolute_path
+      relative.slice! "#{loc}/#{PAGES_PATH_NAME}/"
+      relative.slice! ".md"
+
+      relative
     end
 
   private
