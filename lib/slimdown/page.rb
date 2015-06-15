@@ -1,11 +1,19 @@
 module Slimdown
+  # The model representing a page
   class Page
 
+    # The subdirectory of the slimdown folder containing the markdown documents
     PAGES_PATH_NAME = 'pages'
 
+    # The title from the document headers
     attr_reader :title
+    # The template from the document headers
     attr_reader :template
 
+    # Get new page object
+    #
+    # @param [String] absolute_path The absolute path to this document,
+    #   including extension.
     def initialize(absolute_path)
       # Open the markdown file.
       @absolute_path = absolute_path
@@ -15,6 +23,13 @@ module Slimdown
       load_headers
     end
 
+    # Get page object by relative path.
+    #
+    # Example:
+    #    Slimdown::Page.find('about/contact')
+    #
+    # @param [String] path relative path to page. Doesn't include extension.
+    # @return [Slimdown::Page] the page corresponding to this path.
     def self.find(path)
       # Finds the relative page.
       config = Slimdown.config
@@ -23,10 +38,16 @@ module Slimdown
       self.new("#{loc}/#{PAGES_PATH_NAME}/#{path}.md")
     end
 
+    # Get the parsed body
+    #
+    # @return [Kramdown::Document] the parsed Markdown body.
     def body
       @parsed_page.body
     end
 
+    # The sibling pages to this document.
+    #
+    # @return [Array<Slimdown::Page>] a list of sibling pages.
     def siblings
       # List other markdown files in the same folder.
 
@@ -36,6 +57,9 @@ module Slimdown
       Slimdown::Folder.new(folder).pages
     end
 
+    # The children of this document.
+    #
+    # @return [Array<Slimdown::Page>] a list of child pages.
     def children
       # Check to see whether dir exists.
       folder = @absolute_path
@@ -44,6 +68,9 @@ module Slimdown
       Slimdown::Folder.new(folder).pages
     end
 
+    # The relative path for this document.
+    #
+    # @return [String] the relative path, e.g. 'about/contact'
     def path
       loc = Slimdown.config.location
       relative = @absolute_path

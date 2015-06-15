@@ -1,9 +1,13 @@
 module Slimdown
+  # Internal class for retrieving information about a folder.
   class Folder
     def initialize(absolute_path)
       @absolute_path = absolute_path
     end
 
+    # Returns a list of markdown files in the folder.
+    #
+    # @return [Array<String>] List of paths.
     def markdown_files
       return [] unless Dir.exists? @absolute_path
 
@@ -11,6 +15,9 @@ module Slimdown
       files = dir.entries.grep(/\.md\z/i)
     end
 
+    # Returns a list of page objects in the folder.
+    #
+    # @return [Array<Slimdown::Page>] List of pages.
     def pages
       pages = []
 
