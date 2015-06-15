@@ -39,6 +39,9 @@ module Slimdown
           end
         end
       end
+
+    rescue Errno::ENOENT
+      raise Slimdown::Exception, 'Page not found'
     end
 
   end

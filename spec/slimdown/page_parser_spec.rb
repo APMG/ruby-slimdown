@@ -13,4 +13,10 @@ describe Slimdown::PageParser do
     body = page.body
     expect(body.to_html).to eql(markdown_html)
   end
+
+  it 'handles non-existant page' do
+    expect {
+      page = Slimdown::PageParser.new("#{fixtures_dir}/test_pages/pages/bwahahaha.md")
+    }.to raise_error Slimdown::Exception, 'Page not found'
+  end
 end

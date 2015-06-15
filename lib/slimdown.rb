@@ -1,4 +1,5 @@
 require "slimdown/version"
+require "slimdown/exception"
 require "slimdown/page_parser"
 require "slimdown/folder"
 require "slimdown/page"

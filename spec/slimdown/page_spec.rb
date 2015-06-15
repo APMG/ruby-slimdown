@@ -12,6 +12,12 @@ describe Slimdown::Page do
     page = Slimdown::Page.new("#{fixtures_dir}/test_pages/pages/test.md")
   end
 
+  it 'handles non-existant page' do
+    expect {
+      page = Slimdown::Page.new("#{fixtures_dir}/test_pages/pages/bwahahaha.md")
+    }.to raise_error Slimdown::Exception, 'Page not found'
+  end
+
   describe '.find' do
     it 'handles root page' do
       page = Slimdown::Page.find('test')
