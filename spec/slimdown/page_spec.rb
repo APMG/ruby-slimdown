@@ -9,12 +9,12 @@ describe Slimdown::Page do
   end
 
   it 'is sane' do
-    page = Slimdown::Page.new("#{fixtures_dir}/test_pages/pages/test.md")
+    page = Slimdown::Page.new("#{fixtures_dir}/test_pages/test.md")
   end
 
   it 'handles non-existant page' do
     expect {
-      page = Slimdown::Page.new("#{fixtures_dir}/test_pages/pages/bwahahaha.md")
+      page = Slimdown::Page.new("#{fixtures_dir}/test_pages/bwahahaha.md")
     }.to raise_error Slimdown::Exception, 'Page not found'
   end
 

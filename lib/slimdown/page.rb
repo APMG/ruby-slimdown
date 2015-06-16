@@ -2,9 +2,6 @@ module Slimdown
   # The model representing a page
   class Page
 
-    # The subdirectory of the slimdown folder containing the markdown documents
-    PAGES_PATH_NAME = 'pages'
-
     # The title from the document headers
     attr_reader :title
     # The template from the document headers
@@ -35,7 +32,7 @@ module Slimdown
       config = Slimdown.config
       loc = config.location
 
-      self.new("#{loc}/#{PAGES_PATH_NAME}/#{path}.md")
+      self.new("#{loc}/#{path}.md")
     end
 
     # Get the parsed body
@@ -74,7 +71,7 @@ module Slimdown
     def path
       loc = Slimdown.config.location
       relative = @absolute_path
-      relative.slice! "#{loc}/#{PAGES_PATH_NAME}/"
+      relative.slice! "#{loc}/"
       relative.slice! '.md'
 
       relative

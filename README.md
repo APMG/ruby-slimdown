@@ -71,11 +71,6 @@ The use case for us is that we have a distinct repo containing the markdown (and
 some other files) which is editable by producers. This is autodeployed to a
 location on our servers which is accessible from our Rails app.
 
-The actual pages live in `[location]/pages`. It is assumed that you will have
-other files in there as well. In our use case, we have `/files` as well, which
-is aliased as an asset store of sorts. We also have `/_deploy` with Capistrano
-deployment code.
-
 
 ## Development
 
