@@ -47,9 +47,9 @@ module Slimdown
           elsif line.strip == '---' && part == :header
             part = :body
           elsif part == :header
-            @header_text += "#{line}\n"
+            @header_text += line
           elsif part == :body
-            @body_text += "#{line}\n"
+            @body_text += line
           end
         end
       end

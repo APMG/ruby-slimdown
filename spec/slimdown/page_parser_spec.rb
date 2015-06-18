@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Slimdown::PageParser do
 
-  let(:markdown_html) { "\n<p>This is a test markdown page.</p>\n\n<h1 id=\"header\">Header!!!</h1>\n\n" }
+  let(:markdown_html) { "\n<p>This is a test markdown page.</p>\n\n<h1 id=\"header\">Header!!!</h1>\n\n<p>This is a<br />\nhard line break.</p>\n" }
 
   it 'parses a page' do
     page = Slimdown::PageParser.new("#{fixtures_dir}/test_pages/test.md")
