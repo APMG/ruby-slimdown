@@ -64,6 +64,22 @@ to your pages.
       c.location = Rails.root.join('lib/pages')
     end
 
+## Testing
+
+Don't bother with a SlimdownController spec since you'd be essentially testing for an arbitrary url. You can do a feature test with Capybara or friends. But I'd test it with a good old request spec. For example, you have an about.md in your remote repo or lib/pages then in your spec/requests/slimdown_request_spec.rb
+
+```ruby
+RSpec.describe "Static Pages", :type => :request do
+  describe "GET /" do
+    it "#show" do
+      get "/about"
+      expect(response).to render_template(:show)
+      expect(response.status).to be(200)
+    end
+  end
+end
+```
+
 
 ## General notes
 
