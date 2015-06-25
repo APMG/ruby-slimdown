@@ -64,6 +64,33 @@ to your pages.
       c.location = Rails.root.join('lib/pages')
     end
 
+## Testing
+
+Testing using a controller spec is not possible because you are testing for an
+arbitrary url. You can do a feature test with Capybara or friends. However,
+given that you are just returning content, you can use a request spec. For
+example, you have an about.md in your remote repo or lib/pages then in your
+spec/requests/slimdown_request_spec.rb. Additionally, you can override the page
+path for the test, allowing you to use a fixture directory.
+
+```ruby
+RSpec.describe "Static Pages", type: :request do
+  before :each do
+    Slimdown.config do |c|
+      c.location = Rails.root.join '/spec/fixtures/test_pages'
+    end
+  end
+
+  describe "GET /" do
+    it "#show" do
+      get "/about"
+      expect(response).to render_template(:show)
+      expect(response.status).to be(200)
+    end
+  end
+end
+```
+
 
 ## General notes
 
