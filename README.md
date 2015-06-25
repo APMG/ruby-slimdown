@@ -66,10 +66,21 @@ to your pages.
 
 ## Testing
 
-Don't bother with a SlimdownController spec since you'd be essentially testing for an arbitrary url. You can do a feature test with Capybara or friends. But I'd test it with a good old request spec. For example, you have an about.md in your remote repo or lib/pages then in your spec/requests/slimdown_request_spec.rb
+Testing using a controller spec is not possible because you are testing for an
+arbitrary url. You can do a feature test with Capybara or friends. However,
+given that you are just returning content, you can use a request spec. For
+example, you have an about.md in your remote repo or lib/pages then in your
+spec/requests/slimdown_request_spec.rb. Additionally, you can override the page
+path for the test, allowing you to use a fixture directory.
 
 ```ruby
-RSpec.describe "Static Pages", :type => :request do
+RSpec.describe "Static Pages", type: :request do
+  before :each do
+    Slimdown.config do |c|
+      c.location = Rails.root.join '/spec/fixtures/test_pages'
+    end
+  end
+
   describe "GET /" do
     it "#show" do
       get "/about"
