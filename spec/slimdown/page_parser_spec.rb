@@ -19,4 +19,10 @@ describe Slimdown::PageParser do
       page = Slimdown::PageParser.new("#{fixtures_dir}/test_pages/bwahahaha.md")
     }.to raise_error Slimdown::Exception, 'Page not found'
   end
+
+  it 'handles page with missing frontmatter' do
+    page = Slimdown::PageParser.new("#{fixtures_dir}/test_pages/missing_frontmatter.md")
+    expect(page.headers).to eql({})
+    expect(page.body.to_html).to eql("<h1 id=\"first-header\">First header</h1>\n\n<p>Body text.</p>\n")
+  end
 end

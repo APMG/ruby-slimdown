@@ -31,9 +31,10 @@ describe Slimdown::Page do
       page = Slimdown::Page.find('test')
 
       siblings = page.siblings
-      expect(siblings.count).to eql(2)
-      expect(siblings[0].title).to eql('A test sibling title')
-      expect(siblings[1].title).to eql('A test slimdown title')
+      expect(siblings.count).to eql(3)
+      expect(siblings[0].title).to be_nil
+      expect(siblings[1].title).to eql('A test sibling title')
+      expect(siblings[2].title).to eql('A test slimdown title')
     end
   end
 

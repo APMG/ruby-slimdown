@@ -21,7 +21,10 @@ module Slimdown
     #
     # @return [Hash] document headers
     def headers
-      YAML.load @header_text
+      head = {}
+      head = YAML.load @header_text unless @header_text == ''
+
+      head
     end
 
     # The parsed markdown document body.
@@ -48,7 +51,7 @@ module Slimdown
             part = :body
           elsif part == :header
             @header_text += line
-          elsif part == :body
+          elsif part == :body || part == nil
             @body_text += line
           end
         end
