@@ -53,7 +53,7 @@ Then add a view for the show action.
     </ul>
 
 Add a route to direct all unhandled requests to your controller. Make sure that
-it is at the end of your routes.rb so it doesn't superseed other routes.
+it is at the end of your routes.rb so it doesn't supersede other routes.
 
     get '/*slug', to: 'slimdown#show'
 
