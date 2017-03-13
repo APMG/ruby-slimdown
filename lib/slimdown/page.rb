@@ -6,6 +6,8 @@ module Slimdown
     attr_reader :title
     # The template from the document headers
     attr_reader :template
+    # All the document headers
+    attr_reader :headers
 
     # Get new page object
     #
@@ -80,9 +82,9 @@ module Slimdown
   private
 
     def load_headers
-      headers = @parsed_page.headers
-      @title = headers['title']
-      @template = headers['template']
+      @headers = @parsed_page.headers
+      @title = @headers['title']
+      @template = @headers['template']
     end
   end
 end

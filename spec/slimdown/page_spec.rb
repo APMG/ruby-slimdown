@@ -9,12 +9,12 @@ describe Slimdown::Page do
   end
 
   it 'is sane' do
-    page = Slimdown::Page.new("#{fixtures_dir}/test_pages/test.md")
+    Slimdown::Page.new("#{fixtures_dir}/test_pages/test.md")
   end
 
   it 'handles non-existant page' do
     expect {
-      page = Slimdown::Page.new("#{fixtures_dir}/test_pages/bwahahaha.md")
+      Slimdown::Page.new("#{fixtures_dir}/test_pages/bwahahaha.md")
     }.to raise_error Slimdown::Exception, 'Page not found'
   end
 
@@ -23,6 +23,9 @@ describe Slimdown::Page do
       page = Slimdown::Page.find('test')
 
       expect(page.title).to eql('A test slimdown title')
+      expect(page.headers).to be_a(Hash)
+      expect(page.headers['og-title']).to eql('This is only a test')
+      expect(page.headers['og-image']).to eql('http://some.where.net/picture.png')
     end
   end
 
