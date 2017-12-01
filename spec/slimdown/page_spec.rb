@@ -62,13 +62,14 @@ describe Slimdown::Page do
     it 'returns parent' do
       page = Slimdown::Page.find('test/child')
       parent = page.parent
-      expect(parent).to be_a(Slimdown::Page)
+      expect(parent).to be_a Slimdown::Page
+      expect(parent.path).to eq 'test'
     end
 
     it 'returns nil when no parent' do
       page = Slimdown::Page.find('test')
       parent = page.parent
-      expect(parent).to eq(nil)
+      expect(parent).to eq nil
     end
   end
 

@@ -1,5 +1,3 @@
-require 'pathname'
-
 module Slimdown
   # The model representing a page
   class Page
@@ -72,10 +70,7 @@ module Slimdown
     #
     # @return [<Slimdown::Page>|nil] the parent, if it exists
     def parent
-      folder = @absolute_path
-      folder.slice! '.md'
-
-      parent = Pathname.new(folder).parent.to_s + '.md'
+      parent = File.expand_path('..', @absolute_path).concat('.md')
 
       return nil unless File.file?(parent)
 
