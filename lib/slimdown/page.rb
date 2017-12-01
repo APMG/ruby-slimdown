@@ -1,7 +1,8 @@
+require 'pathname'
+
 module Slimdown
   # The model representing a page
   class Page
-
     # The title from the document headers
     attr_reader :title
     # The template from the document headers
@@ -67,6 +68,20 @@ module Slimdown
       Slimdown::Folder.new(folder).pages
     end
 
+    # The parent of this document
+    #
+    # @return [<Slimdown::Page>|nil] the parent, if it exists
+    def parent
+      folder = @absolute_path
+      folder.slice! '.md'
+
+      parent = Pathname.new(folder).parent.to_s + '.md'
+
+      return nil unless File.file?(parent)
+
+      Slimdown::Page.new(parent)
+    end
+
     # The relative path for this document.
     #
     # @return [String] the relative path, e.g. 'about/contact'
@@ -79,7 +94,7 @@ module Slimdown
       relative
     end
 
-  private
+    private
 
     def load_headers
       @headers = @parsed_page.headers

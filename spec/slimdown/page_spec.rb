@@ -58,6 +58,21 @@ describe Slimdown::Page do
     end
   end
 
+  describe '#parent' do
+    it 'returns parent' do
+      page = Slimdown::Page.find('test/child')
+      parent = page.parent
+      expect(parent).to be_a(Slimdown::Page)
+    end
+
+    it 'returns nil when no parent' do
+      page = Slimdown::Page.find('test')
+      parent = page.parent
+      expect(parent).to eq(nil)
+    end
+  end
+
+
   describe '#path' do
     it 'works at root level' do
       page = Slimdown::Page.find('test')
