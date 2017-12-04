@@ -28,41 +28,49 @@ Or install it yourself as:
 To add to your app, create a controller with one action, such as `show`. In that
 action, add code to pull in the action:
 
-    class SlimdownController < ApplicationController
-      def show
-        @page = Slimdown::Page.find(params[:slug])
-      end
-    end
+```ruby
+class SlimdownController < ApplicationController
+  def show
+    @page = Slimdown::Page.find(params[:slug])
+  end
+end
+```
 
 Then add a view for the show action.
 
-    <%= @page.body.to_html.html_safe %>
+```erb
+<%= @page.body.to_html.html_safe %>
 
-    <h2>Sibling Pages</h2>
-    <ul>
-      <% @page.siblings.each do |sibling| %>
-        <li><%= link_to sibling.title, "/#{sibling.path}" %></li>
-      <% end %>
-    </ul>
+<h2>Sibling Pages</h2>
+<ul>
+  <% @page.siblings.each do |sibling| %>
+    <li><%= link_to sibling.title, "/#{sibling.path}" %></li>
+  <% end %>
+</ul>
 
-    <h2>Child Pages</h2>
-    <ul>
-      <% @page.children.each do |child| %>
-        <li><%= link_to child.title, "/#{child.path}" %></li>
-      <% end %>
-    </ul>
+<h2>Child Pages</h2>
+<ul>
+  <% @page.children.each do |child| %>
+    <li><%= link_to child.title, "/#{child.path}" %></li>
+  <% end %>
+</ul>
+```
 
 Add a route to direct all unhandled requests to your controller. Make sure that
 it is at the end of your routes.rb so it doesn't supersede other routes.
 
-    get '/*slug', to: 'slimdown#show'
+```ruby
+get '/*slug', to: 'slimdown#show'
+```
 
 Finally, add an initializer in `config/initializers/slimdown.rb` to set the path
 to your pages.
 
-    Slimdown.config do |c|
-      c.location = Rails.root.join('lib/pages')
-    end
+```ruby
+Slimdown.config do |c|
+  c.location = Rails.root.join('lib/pages')
+end
+```
 
 ## Testing
 
