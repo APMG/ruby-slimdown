@@ -60,10 +60,7 @@ module Slimdown
     # @return [Array<Slimdown::Page>] a list of child pages.
     def children
       # Check to see whether dir exists.
-      folder = @absolute_path
-      folder.slice! '.md'
-
-      Slimdown::Folder.new(folder).pages
+      Slimdown::Folder.new(@absolute_path.chomp('.md')).pages
     end
 
     # The parent of this document
@@ -81,12 +78,7 @@ module Slimdown
     #
     # @return [String] the relative path, e.g. 'about/contact'
     def path
-      loc = Slimdown.config.location
-      relative = @absolute_path
-      relative.slice! "#{loc}/"
-      relative.slice! '.md'
-
-      relative
+      @absolute_path.sub(%r{^#{Slimdown.config.location}/(.*)\.md}, '\1')
     end
 
     private
