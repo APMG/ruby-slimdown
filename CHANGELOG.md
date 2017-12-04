@@ -5,7 +5,7 @@
 
 * Your contribution here!
 
-## [`1.1.0`] (2017-03-13)
+## [`1.1.0`] (2017-12-04)
 [`1.1.0`]: https://github.com/APMG/ruby-slimdown/compare/1.0.2...1.1.0
 
 * [#2](https://github.com/APMG/ruby-slimdown/pull/2): Added page parent method.
