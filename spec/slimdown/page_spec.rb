@@ -35,9 +35,7 @@ describe Slimdown::Page do
 
       siblings = page.siblings
       expect(siblings.count).to eql(3)
-      expect(siblings[0].title).to be_nil
-      expect(siblings[1].title).to eql('A test sibling title')
-      expect(siblings[2].title).to eql('A test slimdown title')
+      expect(siblings.map(&:title)).to include(nil, 'A test sibling title', 'A test slimdown title')
     end
   end
 
